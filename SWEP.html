@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+<head>
+    <title>GitFit</title>
+    <style>
+
+
+  </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="script.js"></script>
+    <link rel="stylesheet" href="style2.css" />
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="myobjects.js" >
+    </script>
+
+    <script>
+        function save()
+        {
+            var calval=JSON.stringify(cal.calendar);
+            var bodval=JSON.stringify([bod.back, bod.chest, bod.arms, bod.legs])
+            localStorage.setItem("cal",calval)
+            localStorage.setItem("bod",bodval)
+        }
+        function load(){
+            var stored= localStorage.getItem('cal');
+            var bodstor=localStorage.getItem('bod')
+            if(stored)
+            {
+                cal.calendar=JSON.parse(stored);
+                var temp=JSON.parse(bodstor);
+                bod.bodyUpdate(temp[0],temp[1],temp[2],temp[3])
+            }
+        }
+    </script>
+
+</head>
+
+<div class="header">
+
+  <h1>GitFit</h1>
+
+</div>
+
+<body onload="load()" class="container" id = "bod">
+    <main class="container" id="main">
+		<div id="tabs" class="container">
+			<ul class="nav nav-tabs" role="tablist">
+				<li class="nav-item">
+					<a href="#input" class="nav-link active"  data-toggle="tab" role="tab" aria-controls="fall" id="inputTab">Input</a>
+				</li>
+				<li class="nav-item">
+					<a href="#calendartab" class="nav-link"  data-toggle="tab" role="tab" aria-controls="calendartab">Calendar</a>
+				</li>
+				<li class="nav-item">
+					<a href="#diagram" class="nav-link"  data-toggle="tab" role="tab" aria-controls="diagram">Diagram</a>
+				</li>
+			</ul>
+
+			<div class="tab-content" id="tabCont">
+                <br>
+				<div class="tab-pane active"  role="tabpanel" id="input">
+					<form name="add">
+						<label>Workout</label>
+						<select id="workout">
+							<option>Run</option>
+							<option>Swim</option>
+							<option>Bike</option>
+							<option>Chest</option>
+							<option>Arms</option>
+							<option>Back</option>
+							<option>Legs</option>
+						</select>
+						<br>
+						<label >Intensity</label>
+						<select id="intensity">
+                            <option >1</option>
+                            <option >2</option>
+                            <option >3</option>
+                            <option >4</option>
+                            <option >5</option>
+                            <option >6</option>
+                            <option >7</option>
+                            <option >8</option>
+                            <option >9</option>
+                            <option >10</option>
+						</select>
+						<br>
+						<label >Day</label>
+						<select id="day">
+                            <option >1</option>
+                            <option >2</option>
+                            <option >3</option>
+                            <option >4</option>
+                            <option >5</option>
+                            <option >6</option>
+                            <option >7</option>
+                            <option >8</option>
+                            <option >9</option>
+                            <option >10</option>
+                            <option >11</option>
+                            <option >12</option>
+                            <option >13</option>
+                            <option >14</option>
+                            <option >15</option>
+                            <option >16</option>
+                            <option >17</option>
+                            <option >18</option>
+                            <option >19</option>
+                            <option >20</option>
+                            <option >21</option>
+                            <option >22</option>
+                            <option >23</option>
+                            <option >24</option>
+                            <option >25</option>
+                            <option >26</option>
+                            <option >27</option>
+                            <option >28</option>
+                            <option >29</option>
+                            <option >30</option>
+						</select>
+						<label >Month</label>
+						<select id="mon">
+							<option >1</option>
+							<option >2</option>
+							<option >3</option>
+                            <option >4</option>
+                            <option >5</option>
+                            <option >6</option>
+                            <option >7</option>
+                            <option >8</option>
+                            <option >9</option>
+                            <option >10</option>
+                            <option >11</option>
+                            <option >12</option>
+						</select>
+                        <br>
+                        <br>
+                        <button type="button" class="lastbutton"  onclick="cal.addToCalendar(); bod.addToBody(); save();">Log Workout</button>
+				        <br>
+                        <br>
+                        <button type="button" class="lastbutton"  onclick="localStorage.clear();">Clear log</button>
+                        <br>
+                        <br>
+                        <button type="button" class="lastbutton"  onclick="localStorage.setItem('bod','[0,0,0,0]');">Clear Body Diagram</button>
+
+                        <br>
+                    </form>
+					</div>
+
+				    <div class="tab-pane"  role="tabpanel" id="calendartab">
+                        <div class="contain">
+                            <div class="controls">
+                                <p class="next label" onclick="nextMonth();"><i class="fa fa-arrow-right"></i></p>
+                                <p class="previous label" onclick="previousMonth()"><i class="fa fa-arrow-left"></i></p>
+                                <p id="current-month" class="label bold">January</p>
+                            </div>
+
+
+                            <!-- The Modal -->
+                            <div id="myModal" class="modal">
+
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <div id="modalHead">
+                                        <h3></h3>
+                                    </div>
+                                    <div id="modalBody">
+                                        <h6></h6>
+                                    </div>
+                                    <div id="modalFoot">
+                                        <h4></h4>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="calendar" id="calendar">
+                                <!-- Calandar HTML output here -->
+                                <!-- Trigger/Open The Modal -->
+                                <!--<button id="myBtn">Open Modal</button>-->
+
+                            </div>
+                        </div>
+
+				    </div>
+				    <div class="tab-pane"  role="tabpanel" id="diagram">
+						<div id="body">
+							<img src="arms-none.jpg" id="arms">
+							<img src="chest-none.jpg" id="chest">
+							<img src="legs-none.jpg" id="legs">
+							<img src="BACK-NONE.jpg" id="back">
+						</div>
+						<div id="red">
+							<img src="arms-red.jpg"  id="rarms">
+							<img src="chest-red.jpg" id="rchest">
+							<img src="legs-red.jpg"  id="rlegs">
+							<img src="BACK-red.jpg"  id="rback">
+						</div>
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+						<br />
+
+
+                    </div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+<p class="foot">By Avi Sinha, Noah Rothchild, and Sam Giles</p>
+
+</body>
+
+</html>
